@@ -60,6 +60,21 @@ if __name__ == '__main__':
     visualizations = Visualizations(df, y_e, y_rk)
     visualizations.main()
 
+    rN_euler, rF_euler = calibrator.compute_residuals(y_e)
+    rN_rk, rF_rk = calibrator.compute_residuals(y_rk)
+
+    rmse_N_euler = np.sqrt(np.mean(rN_euler ** 2))
+    rmse_F_euler = np.sqrt(np.mean(rF_euler ** 2))
+
+    rmse_N_rk = np.sqrt(np.mean(rN_rk ** 2))
+    rmse_F_rk = np.sqrt(np.mean(rF_rk ** 2))
+
+    print("\nTrajectory RMSE (relative):")
+    print(f"Implicit Euler  - Population RMSE: {rmse_N_euler:.4e}")
+    print(f"Implicit Euler  - Fertility  RMSE: {rmse_F_euler:.4e}")
+    print(f"Trapezoidal RK - Population RMSE: {rmse_N_rk:.4e}")
+    print(f"Trapezoidal RK - Fertility  RMSE: {rmse_F_rk:.4e}")
+
     """ Step 6: Let model run to some year in the future to conduct a scenario """
     start_year, end_year = 2023, 2050
     start_year_i = -1 - (2023 - start_year)

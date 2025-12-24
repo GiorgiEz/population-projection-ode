@@ -26,6 +26,11 @@ class ProjectionVisualizations:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
+        plt.savefig(
+            "src/visualization/plots/population_projection.png",
+            dpi=300,
+            bbox_inches="tight"
+        )
         plt.show()
 
     def fertility_plot(self):
@@ -42,6 +47,11 @@ class ProjectionVisualizations:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
+        plt.savefig(
+            "src/visualization/plots/fertility_projection.png",
+            dpi=300,
+            bbox_inches="tight"
+        )
         plt.show()
 
     def main(self):
