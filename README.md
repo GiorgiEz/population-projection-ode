@@ -93,17 +93,71 @@ Euler and Trapezoidal methods are always applied to the **same calibrated model*
 
 ## Results and Visualizations
 
-The paper includes the following figures:
+### Population: model vs data (1839–2023)
 
-### Figures
+![Population model vs data](src/visualization/plots/population_model_vs_data.png)
 
-* Population vs time (data and model trajectories)
-* Fertility vs time (data and model trajectories)
-* Residuals vs time
-* Long-term population projections
+This figure compares observed United Kingdom population data with model
+trajectories obtained using the implicit Euler method and the trapezoidal rule.
 
-Results show that both implicit methods produce nearly identical solutions at yearly resolution, indicating negligible numerical discretization error relative to modeling assumptions.
+---
 
+### Fertility: model vs data (1839–2023)
+
+![Fertility model vs data](src/visualization/plots/fertility_model_vs_data.png)
+
+The fertility dynamics show a smooth relaxation toward the long-run equilibrium
+fertility assumed in the model.
+
+---
+
+### Population projection (2023–2050)
+
+![Population projection](src/visualization/plots/population_projection.png)
+
+Long-term population projections obtained using calibrated parameters.
+Implicit Euler and trapezoidal methods produce nearly identical trajectories.
+
+---
+
+### Fertility projection (2023–2050)
+
+![Fertility projection](src/visualization/plots/fertility_projection.png)
+
+Projected fertility converges toward the assumed long-run level (F_inf).
+
+---
+
+### Calibrated Data
+| Parameter | Description                    | Value      |
+| ------- | ------------------------------ |------------|
+| (b_0)   | Birth-rate coefficient         | 0.023931   |
+| (alpha) | Fertility elasticity           | 0.0857     |
+| (d)     | Death rate (1/year)            | 0.019310   |
+| (m)     | Migration rate (per 1000/year) | 0.013399   |
+| (K)     | Carrying capacity              | 8.922e+07  |
+| (k)     | Fertility relaxation rate      | 0.013555   |
+| (F_inf) | Long-run fertility             | 1.40       |
+
+---
+
+### Final State Comparison: Euler VS Trapezoidal
+| Method              | (N(2023))  | (F(2023)) |
+| ------------------- | ---------- | --------- |
+| Implicit Euler      | 63,027,054 | 1.6964    |
+| Trapezoidal         | 63,064,710 | 1.6915    |
+| Absolute difference | 37,656     | 0.0049    |
+
+___
+
+### RMSE (Root Mean Square Error) Comparison
+| Method         | Population RMSE | Fertility RMSE |
+| -------------- | --------------- |----------------|
+| Implicit Euler | 7.1119e-02      | 1.7168e-01     |
+| Trapezoidal    | 7.1083e-02      | 1.7165e-01     |
+
+RMSE (root mean square error) quantifies the average relative deviation between model predictions and observed data over the entire simulation period.
+Euler and Trapezoidal have essentially identical accuracy relative to data.
 ---
 
 ## Project Structure

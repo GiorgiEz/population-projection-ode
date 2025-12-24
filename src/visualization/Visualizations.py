@@ -25,6 +25,11 @@ class Visualizations:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
+        plt.savefig(
+            "src/visualization/plots/population_model_vs_data.png",
+            dpi=300,
+            bbox_inches="tight"
+        )
         plt.show()
 
     def actual_vs_modeled_fertility(self):
@@ -44,6 +49,11 @@ class Visualizations:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
+        plt.savefig(
+            "src/visualization/plots/fertility_model_vs_data.png",
+            dpi=300,
+            bbox_inches="tight"
+        )
         plt.show()
 
     def main(self):
