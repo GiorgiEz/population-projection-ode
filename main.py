@@ -5,7 +5,7 @@ from src.methods.implicit_trapezoidal import TrapezoidalRK
 from src.solvers.newton import NewtonSolver
 from src.simulation import solve_custom_ivp
 from src.calibrator import ParameterCalibrator
-from src.visualization.visualization import Visualizations
+from src.visualization.Visualizations import Visualizations
 from src.visualization.ProjectionVisualizations import ProjectionVisualizations
 import numpy as np
 import pandas as pd
