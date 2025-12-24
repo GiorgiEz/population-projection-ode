@@ -1,0 +1,6 @@
+# requirement.txt
+
+numpy
+pandas
+scipy
+matplotlib
