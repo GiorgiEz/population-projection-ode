@@ -6,40 +6,35 @@ class PopulationFertilityModel:
         self.p = params
 
     def birth_rate(self, F):
-        """
-        b(F) = b0 * F^alpha
-        """
+        """ b(F) = b0 * F^alpha """
         return self.p.b0 * F**self.p.alpha
 
     def f(self, t, y):
-        """
-        Right-hand side f(t, y)
-        y = [N, F]
-        """
+        """ Right-hand side f(t, y). y = [N, F] """
         N, F = y
 
         bF = self.birth_rate(F)
-
-        dNdt = (bF - self.p.d + self.p.m) * N * (1.0 - N / self.p.K)
+        dNdt = (
+                bF * N * (1 - N / self.p.K)
+                - self.p.d * N
+                + N * self.p.m
+        )
         dFdt = -self.p.k * (F - self.p.F_inf)
 
         return np.array([dNdt, dFdt])
 
     def jacobian(self, t, y):
-        """
-        Jacobian matrix df/dy for Newton iterations
-        """
         N, F = y
-        bF = self.birth_rate(F)
 
-        # partial derivatives
-        dfdN = (bF - self.p.d + self.p.m) * (1 - 2 * N / self.p.K)
-        dbdF = self.p.b0 * self.p.alpha * F**(self.p.alpha - 1)
+        bF = self.birth_rate(F)
+        dbdF = self.p.b0 * self.p.alpha * F ** (self.p.alpha - 1)
+
+        dfdN = bF * (1 - 2 * N / self.p.K) - self.p.d + self.p.m
         dfdF = dbdF * N * (1 - N / self.p.K)
 
         dgdF = -self.p.k
 
         return np.array([
             [dfdN, dfdF],
-            [0.0,  dgdF]
+            [0.0, dgdF]
         ])
