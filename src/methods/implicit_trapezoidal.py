@@ -6,10 +6,8 @@ class TrapezoidalRK:
         self.solver = nonlinear_solver
 
     def step(self, model, t, y, dt):
-        f_n = model.f(t, y)
-
         def G(y_next):
-            return y_next - y - 0.5 * dt * (f_n + model.f(t + dt, y_next))
+            return y_next - y - 0.5 * dt * (model.f(t, y) + model.f(t + dt, y_next))
 
         I = np.eye(len(y))
         def J(y_next):
